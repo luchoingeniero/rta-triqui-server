@@ -1,0 +1,22 @@
+{
+  "name": "rta-triqui-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luchoingeniero/rta-triqui-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luchoingeniero/rta-triqui-server/issues"
+  },
+  "homepage": "https://github.com/luchoingeniero/rta-triqui-server#readme",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  }
+}
