@@ -29,6 +29,22 @@ module.exports= {
             }
             
         }
+    },
+    addPoint(indexwin){
+        indexwin=indexwin-1;
+        let win = users[indexwin];
+        win.points = win.points+1;
+        users[indexwin]=win;
+    },
+
+    winner(indexwin){
+        indexwin=indexwin-1;
+        const indexLost = (indexwin==0)?1:0;
+        let win = users[indexwin];
+        let lost = users[indexLost];
+        users[0]=win;
+        users.splice(1, 1);
+        users.push(lost);
     }
 
 }

@@ -4,12 +4,13 @@ players = ["O","X"];
 
 var winner = "";
 var jugadas = 0;
+var turn = 1;
 
 getTriqui = () => {
     if(triqui==null){
         startGame();
     }
-    return triqui;
+    return {turn, triqui};
 }
 
 hasWinner = () => {
@@ -41,18 +42,21 @@ play = (i,j,player) => {
     if(!winner){
     jugadas++;
     triqui[i][j] = players[player-1];
+    turn=(player==1)?2:1;
     }
 }
 
 startGame = () => {
     jugadas = 0;
     winner = "";
+    turn = 1;
     triqui = [
                 [undefined,undefined,undefined],
                 [undefined,undefined,undefined],
                 [undefined,undefined,undefined],
             ];
 }
+
 
 gameOver = ()=>{
     return jugadas>=8;

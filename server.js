@@ -3,7 +3,7 @@ var io = require('socket.io')(http);
 var adminUsers = require('./admin-users');
 var triqui = require('./triqui-game');
 var joinEvent = require('./join-event');
-var HOST = 'localhost';
+var HOST = '192.168.1.7';
 var PORT_SOCKET=3000;
 
 var users = [];
@@ -13,7 +13,8 @@ var events = {
   new_user:'users',
   play:'play',
   triqui:'triqui',
-  winner:'hasWinner'
+  winner:'hasWinner',
+  newGame:'newGame'
 }
 
 
@@ -28,8 +29,21 @@ io.on('connection', function(socket) {
     triqui.play(data.i,data.j,data.player);
     io.emit(events.triqui,triqui.getTriqui());
     if(triqui.hasWinner()){
+      adminUsers.addPoint(triqui.getWinner());
+      io.sockets.emit( events.new_user , adminUsers.getUsers() );
       io.emit(events.winner,triqui.getWinner());
     }
+
+  });
+
+  socket.on(events.newGame,function(){
+    console.log("uew Game");
+    adminUsers.winner(triqui.getWinner());
+    triqui.startGame();
+    console.log(adminUsers.getUsers());
+    console.log(triqui.getTriqui());
+    io.sockets.emit( events.new_user , adminUsers.getUsers() );
+    io.emit(events.triqui,triqui.getTriqui());
 
   });
 
